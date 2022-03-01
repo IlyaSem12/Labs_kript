@@ -1,5 +1,5 @@
 from tkinter import *
-
+from tkinter import messagebox as mb
 window = Tk()
 window.title("Шифр цезаря")
 window.resizable(False,False)
@@ -9,7 +9,12 @@ alf = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВ�
 
 def cripto():
     word = entr_txt.get().upper()
-    step = int(entrstep.get())
+    try:
+        step = int(entrstep.get())
+    except:
+        mb.showerror(
+            "Ошибка",
+            "Должно быть введено число")
 
     message = ""
     revmessage = ""
@@ -33,7 +38,7 @@ def cripto():
     print(message)
     print(revmessage)
     text.insert(1.0, message + '\n')
-    text.insert(1.0, revmessage + '\n')
+    text.insert(2.0, revmessage + '\n')
 
 
 lbl= Label(window,text="Введите слово:").grid(column=0,row=0,pady=8, padx=8)
