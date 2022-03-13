@@ -147,7 +147,6 @@ def change():
     if r_var.get() == 0:
         btn_go.config(command=lambda: cripto(entrkey.get(), entr_txt.get()))
     elif r_var.get() == 1:
-        print('хуйня')
         btn_go.config(command=lambda: decripto(entrkey.get(), entr_txt.get()))
 
 btn_save = Button(window, text="save",command= change)
@@ -158,5 +157,6 @@ frame.grid(column=0,row=2,pady=8, padx=8,rowspan=2,columnspan=2)
 
 text=Text(frame,width=30, height=5)
 text.pack(side=LEFT)
+
 
 window.mainloop()
