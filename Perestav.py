@@ -16,11 +16,11 @@ def cripto(key, message):
 
     if len(key) > len(messagetxt):
         for i in range(len(key) * 2 - len(messagetxt)):
-            messagetxt += '*'
+            messagetxt += '_'
 
     if len(messagetxt) % len(key) != 0:
         while len(messagetxt) % len(key) != 0:
-            messagetxt += '*'
+            messagetxt += '_'
 
     stroki = len(messagetxt) // len(key)
 
@@ -47,6 +47,11 @@ def cripto(key, message):
         tabl[i] += messagetxt[i * len(key): i * len(key) + len(key)]
 
     for i in range(len(tabl)):
+        for j in range(len(key)):
+            print(len(key))
+            b = Entry(frameTabl,width = 8)  # создание таблицы
+            b.grid(row=j, column=i)  # расположение таблицы
+            b.insert(0, tabl[i][j])  # добавление значений
         print(tabl[i])
 
     for i in range(len(result)):
@@ -116,19 +121,17 @@ def decripto(key, message):
 
 ##############кнопки#########################################################
 
-lbl= Label(window,text="Введите текст:").grid(column=0,row=0,pady=8, padx=8)
+lbl= Label(window,text="Введите текст:").grid(column=0,row=0,pady=8, padx=8,sticky=W)
 lbl2= Label(window,text="Введите ключ:").grid(column=0,row=1,pady=8, padx=8,sticky=W)
 
 
 entr_txt=Entry(window,width=30)
-entr_txt.grid(column=1,row=0,columnspan=3,pady=8, padx=8)
+entr_txt.grid(column=1,row=0,columnspan=3,pady=8, padx=8,sticky=W)
 entrkey=Entry(window,width=15)
 entrkey.grid(column=1,row=1,pady=8, padx=8,sticky=W)
 
 btn_go = Button(window, text="жмак")
 btn_go.grid(column=2, row=1, pady=8, padx=8, sticky=W)
-
-
 
 
 r_var = IntVar()
@@ -139,8 +142,8 @@ r1 = Radiobutton(text='Зашифровать',
 r2 = Radiobutton(text='Расшифровать',
                  variable=r_var, value=1)
 
-r1.grid(column=4,row=0,pady=8, padx=8)
-r2.grid(column=4,row=1,pady=8, padx=8)
+r1.grid(column=3,row=0,pady=8, padx=8)
+r2.grid(column=3,row=1,pady=8, padx=8)
 
 def change():
 
@@ -150,13 +153,18 @@ def change():
         btn_go.config(command=lambda: decripto(entrkey.get(), entr_txt.get()))
 
 btn_save = Button(window, text="save",command= change)
-btn_save.grid(column=3, row=1, pady=8, padx=8, sticky=W)
+btn_save.grid(column=4, row=0, pady=8, padx=8, sticky=E)
 
 frame=LabelFrame(text='Вывод')
 frame.grid(column=0,row=2,pady=8, padx=8,rowspan=2,columnspan=2)
 
 text=Text(frame,width=30, height=5)
 text.pack(side=LEFT)
+
+frameTabl=LabelFrame(text='Таблица')
+frameTabl.grid(column=2,row=2,rowspan=2,columnspan=2)
+
+
 
 
 window.mainloop()
