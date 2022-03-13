@@ -129,6 +129,8 @@ btn_go = Button(window, text="жмак")
 btn_go.grid(column=2, row=1, pady=8, padx=8, sticky=W)
 
 
+
+
 r_var = IntVar()
 r_var.set(0)
 r1 = Radiobutton(text='Зашифровать',
@@ -140,12 +142,16 @@ r2 = Radiobutton(text='Расшифровать',
 r1.grid(column=4,row=0,pady=8, padx=8)
 r2.grid(column=4,row=1,pady=8, padx=8)
 
+def change():
 
-if r_var.get() == 0:
-    btn_go.config(command=lambda: cripto(entrkey.get(), entr_txt.get()))
-elif r_var.get() == 1:
-    print('хуйня')
-    btn_go.config(command=lambda: decripto(entrkey.get(), entr_txt.get()))
+    if r_var.get() == 0:
+        btn_go.config(command=lambda: cripto(entrkey.get(), entr_txt.get()))
+    elif r_var.get() == 1:
+        print('хуйня')
+        btn_go.config(command=lambda: decripto(entrkey.get(), entr_txt.get()))
+
+btn_save = Button(window, text="save",command= change)
+btn_save.grid(column=3, row=1, pady=8, padx=8, sticky=W)
 
 frame=LabelFrame(text='Вывод')
 frame.grid(column=0,row=2,pady=8, padx=8,rowspan=2,columnspan=2)
