@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox as mb
+from tabulate import tabulate
 window = Tk()
 window.title("Шифр перестановки")
 window.resizable(False,False)
@@ -30,6 +31,12 @@ def cripto(key, message):
         else:
             cipher[ch] = messagetxt[index * stroki: index * stroki + stroki]
 
+
+    print(cipher)
+    print(tabulate(cipher.items(), tablefmt="grid"))
+    text2.insert(1.0, tabulate(cipher.items(), tablefmt="grid") + '\n')
+
+
     for index in range(stroki):
         for i in sorted(key.lower()):
             encodemas.append([cipher[i][index]])
@@ -46,13 +53,6 @@ def cripto(key, message):
         tabl.append([])
         tabl[i] += messagetxt[i * len(key): i * len(key) + len(key)]
 
-    for i in range(len(tabl)):
-        for j in range(len(key)):
-            print(len(key))
-            b = Entry(frameTabl,width = 8)  # создание таблицы
-            b.grid(row=j, column=i)  # расположение таблицы
-            b.insert(0, tabl[i][j])  # добавление значений
-        print(tabl[i])
 
     for i in range(len(result)):
         # messagetxt += message[i]
@@ -78,16 +78,9 @@ def decripto(key, message):
     sortkey = sorted(key.lower())
     stroki = len(messagetxt) // len(key)
 
-    print("message", message)
-
-    print("messagetxt", messagetxt)
-
     for i in range(stroki):
         decodemas.append([])
         decodemas[i] += messagetxt[i * len(key): i * len(key) + len(key)]
-
-    for i in range(len(decodemas)):
-        print(decodemas[i])
 
     destr = ""
 
@@ -164,6 +157,8 @@ text.pack(side=LEFT)
 frameTabl=LabelFrame(text='Таблица')
 frameTabl.grid(column=2,row=2,rowspan=2,columnspan=2)
 
+text2=Text(frameTabl,width=30, height=5)
+text2.pack(side=LEFT)
 
 
 
